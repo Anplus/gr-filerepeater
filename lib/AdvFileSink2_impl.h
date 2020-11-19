@@ -675,92 +675,25 @@
  * <http://www.gnu.org/philosophy/why-not-lgpl.html>.
  */
 
-#ifndef INCLUDED_FILEREPEATER_ADVFILESINK_IMPL_H
-#define INCLUDED_FILEREPEATER_ADVFILESINK_IMPL_H
+#ifndef INCLUDED_FILEREPEATER_ADVFILESINK2_IMPL_H
+#define INCLUDED_FILEREPEATER_ADVFILESINK2_IMPL_H
 
-#include <filerepeater/AdvFileSink.h>
-#include <chrono>
-#include <ctime>
-
-using namespace std;
-
-#define AFS_DATATYPE_COMPLEX 1
-#define AFS_DATATYPE_FLOAT 2
-#define AFS_DATATYPE_INT 3
-#define AFS_DATATYPE_SHORT 4
-#define AFS_DATATYPE_BYTE 5
-#define AFS_DATATYPE_WAV 6
+#include <filerepeater/AdvFileSink2.h>
 
 namespace gr
 {
   namespace filerepeater
   {
 
-    class AdvFileSink_impl : public AdvFileSink
+    class AdvFileSink2_impl : public AdvFileSink2
     {
     private:
       // Nothing to declare in this block.
-      bool d_currentState;
-
-      bool d_useTime;
-      bool d_useSize;
-
-      int d_datatype;
-      int d_itemsize;
-      string d_baseDir;
-      string d_baseFile;
-      string d_fileExtension;
-      bool d_bUnbuffered;
-
-      long d_maxFileSize;
-      long d_maxSec;
-
-      long d_bytesWritten;
-
-      float d_sampleRate;
-      float d_frequency;
-
-      bool d_freqCallback;
-      bool d_autoStartFreqChange;
-
-      int d_bits_per_sample; // used for WAV files
-      int d_bytes_per_sample;
-      int d_max_sample_val;
-      int d_min_sample_val;
-      int d_normalize_fac;
-      int d_normalize_shift;
-      int d_nchans;
-      unsigned d_sample_count;
-
-      boost::mutex d_mutex;
-
-      FILE *d_fp = NULL;
-      std::chrono::time_point<std::chrono::steady_clock> start;
-
-      virtual string buildFileName();
-
-      string setTwoDigit(string &numStr);
-
-      virtual bool open(const char *filename);
-      virtual void close();
-
-      short int convert_to_short(float sample);
 
     public:
-      AdvFileSink_impl(int datatype, int itemsize, const char *basedir, const char *basefile, float freq, float sampleRate,
-                       long maxSize, long maxTimeSec, bool startRecordingImmediately, bool freqCallback, bool autostartFreqChange, int bits_per_sample, bool bUnbuffered);
-      ~AdvFileSink_impl();
-
+      AdvFileSink2_impl(int datatype, int itemsize, const char *basedir, const char *basefile, float freq, float sampleRate, long maxSize, long maxTimeSec, bool startRecordingImmediately, bool freqCallback, bool autostartFreqChange, int bits_per_sample, bool bUnbuffered);
+      ~AdvFileSink2_impl();
       void setup_rpc();
-
-      virtual bool stop();
-
-      void handlePDU(pmt::pmt_t msg);
-      void handleMsgStream(pmt::pmt_t msg);
-
-      virtual float getCenterFrequency() const;
-      virtual void setCenterFrequency(float newValue);
-
       // Where all the action really happens
       int work(int noutput_items,
                gr_vector_const_void_star &input_items,
@@ -770,4 +703,4 @@ namespace gr
   } // namespace filerepeater
 } // namespace gr
 
-#endif /* INCLUDED_FILEREPEATER_ADVFILESINK_IMPL_H */
+#endif /* INCLUDED_FILEREPEATER_ADVFILESINK2_IMPL_H */

@@ -27,5 +27,6 @@ install(FILES
     AdvFileSink.h
     StateTimer.h
     TimeOfDay.h
-    VectorToTxtFile.h DESTINATION include/filerepeater
+    VectorToTxtFile.h
+    AdvFileSink2.h DESTINATION include/filerepeater
 )

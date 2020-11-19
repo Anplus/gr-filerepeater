@@ -28,5 +28,6 @@ install(FILES
     filerepeater_TimeOfDay.xml 
     filerepeater_msg_to_file.xml
     filerepeater_MetaToPair.xml
-    filerepeater_VectorToTxtFile.xml DESTINATION share/gnuradio/grc/blocks
+    filerepeater_VectorToTxtFile.xml
+    filerepeater_AdvFileSink2.xml DESTINATION share/gnuradio/grc/blocks
 )
